@@ -1,14 +1,19 @@
 import { NextResponse } from 'next/server';
-import { writeFile } from 'fs/promises';
-import { join } from 'path';
 import { verifyToken } from '@/lib/auth';
-import fs from 'fs';
+import { v2 as cloudinary } from 'cloudinary';
+
+// Initialize Cloudinary connection using env secrets
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export async function POST(request) {
     const token = request.cookies.get('token')?.value;
     const payload = verifyToken(token);
 
-    // Allow citizens to upload profile pictures, so we just check if payload exists.
+    // Allow citizens to upload profile pictures, so we check existence only
     if (!payload) {
         return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
     }
@@ -27,7 +32,7 @@ export async function POST(request) {
             return NextResponse.json({ message: "Invalid upload directory" }, { status: 400 });
         }
 
-        // Validate basic file types
+        // Validate basic file payload types
         const isPdf = file.name.endsWith('.pdf');
         if (folder === 'reports' && !isPdf && !file.type.startsWith('image/')) {
             return NextResponse.json({ message: "Reports must be PDF or image" }, { status: 400 });
@@ -38,26 +43,25 @@ export async function POST(request) {
         const bytes = await file.arrayBuffer();
         const buffer = Buffer.from(bytes);
 
-        // Sanitize filename and add timestamp
-        const ext = file.name.split('.').pop();
-        const baseName = file.name.replace(`.${ext}`, '').replace(/[^a-zA-Z0-9.-]/g, '_');
-        const filename = `${Date.now()}-${baseName}.${ext}`;
+        // Upload directly from memory stream to Cloudinary API securely
+        const uploadResult = await new Promise((resolve, reject) => {
+            const uploadStream = cloudinary.uploader.upload_stream(
+                { folder: `icc/${folder}` },
+                (error, result) => {
+                    if (error) reject(error);
+                    else resolve(result);
+                }
+            );
+            uploadStream.end(buffer);
+        });
 
-        const uploadDir = join(process.cwd(), 'public', 'uploads', folder);
-        const filepath = join(uploadDir, filename);
-
-        if (!fs.existsSync(uploadDir)) {
-            fs.mkdirSync(uploadDir, { recursive: true });
-        }
-
-        await writeFile(filepath, buffer);
-
-        const url = `/uploads/${folder}/${filename}`;
+        // Use the universally accessible secure_url natively generated
+        const url = uploadResult.secure_url;
 
         return NextResponse.json({ url });
 
     } catch (error) {
-        console.error("Upload error", error);
+        console.error("Cloudinary upload error", error);
         return NextResponse.json({ message: 'Internal server error', error: error.message }, { status: 500 });
     }
 }
