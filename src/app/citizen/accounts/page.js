@@ -59,7 +59,7 @@ export default function CitizenAccounts() {
                         <div className="text-2xl font-bold text-gray-900">₹{stats.totalExpense.toLocaleString()}</div>
                     </CardContent>
                 </Card>
-                <Card className={cn("shadow-md border-none text-white", stats.surplus >= 0 ? "bg-[#008f5d]" : "bg-red-600")}>
+                <Card className={cn("shadow-md border-none text-white", stats.surplus >= 0 ? "bg-[#065f46]" : "bg-red-600")}>
                     <CardHeader className="flex flex-row items-center justify-between pb-2">
                         <CardTitle className="text-sm font-medium text-white/80">Net Balance</CardTitle>
                         <Calculator className="h-4 w-4 text-white/80" />

@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Megaphone, CheckCircle2, Circle } from "lucide-react";
+import Image from "next/image";
 
 export default function CitizenAnnouncements() {
     const [announcements, setAnnouncements] = useState([]);
@@ -64,8 +65,8 @@ export default function CitizenAnnouncements() {
                         >
                             <div className="flex flex-col md:flex-row">
                                 {item.image && (
-                                    <div className="md:w-1/3">
-                                        <img src={item.image} alt={item.title} className="w-full h-48 md:h-full object-cover" />
+                                    <div className="w-full h-48 md:w-1/3 relative">
+                                        <Image src={item.image} alt={item.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
                                     </div>
                                 )}
                                 <div className={`p-6 flex-1 flex flex-col ${item.image ? '' : 'w-full'}`}>
@@ -87,7 +88,7 @@ export default function CitizenAnnouncements() {
                                         {!item.isRead ? (
                                             <button
                                                 onClick={() => markAsRead(item._id)}
-                                                className="flex items-center gap-2 text-sm font-medium text-[#008f5d] hover:text-[#007049] transition-colors bg-emerald-50 px-4 py-2 rounded-full"
+                                                className="flex items-center gap-2 text-sm font-medium text-[#065f46] hover:text-[#007049] transition-colors bg-emerald-50 px-4 py-2 rounded-full"
                                             >
                                                 <Circle size={16} /> Acknowledge
                                             </button>

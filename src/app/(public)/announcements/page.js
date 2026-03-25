@@ -1,5 +1,6 @@
 import dbConnect from '@/lib/db';
 import Announcement from '@/models/Announcement';
+import Image from 'next/image';
 
 export const revalidate = 60; // Revalidate every minute
 
@@ -37,8 +38,8 @@ export default async function PublicAnnouncementsPage() {
                         {announcements.map((item) => (
                             <div key={item._id.toString()} className="bg-white rounded-3xl overflow-hidden shadow-sm border border-gray-100 flex flex-col md:flex-row hover:shadow-md transition-shadow">
                                 {item.image && (
-                                    <div className="md:w-1/3 flex-shrink-0">
-                                        <img src={item.image} alt={item.title} className="w-full h-64 md:h-full object-cover" />
+                                    <div className="w-full h-64 md:w-1/3 flex-shrink-0 relative">
+                                        <Image src={item.image} alt={item.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
                                     </div>
                                 )}
                                 <div className={`p-8 flex flex-col justify-center ${item.image ? 'md:w-2/3' : 'w-full'}`}>

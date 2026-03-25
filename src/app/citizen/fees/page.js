@@ -5,6 +5,7 @@ import { CheckCircle2, XCircle, QrCode, Download } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 import { generateReceipt } from "@/lib/generateReceipt";
+import Image from "next/image";
 
 export default function CitizenFeesPage() {
     const [history, setHistory] = useState([]);
@@ -106,7 +107,7 @@ export default function CitizenFeesPage() {
 
                 {/* Sidebar for Payment Info / QR */}
                 <div className="space-y-6">
-                    <Card className="bg-[#008f5d] text-white shadow-lg overflow-hidden border-none relative">
+                    <Card className="bg-[#065f46] text-white shadow-lg overflow-hidden border-none relative">
                         <div className="absolute top-0 right-0 p-4 opacity-10">
                             <QrCode size={120} />
                         </div>
@@ -117,11 +118,13 @@ export default function CitizenFeesPage() {
                             </p>
 
                             {settings.monthlyFeeQr ? (
-                                <div className="bg-white p-4 rounded-2xl shadow-inner mb-4">
-                                    <img
+                                <div className="bg-white p-4 rounded-2xl shadow-inner mb-4 relative aspect-square w-full">
+                                    <Image
                                         src={settings.monthlyFeeQr}
                                         alt="Monthly Fee Payment QR"
-                                        className="w-full aspect-square object-contain rounded-lg"
+                                        fill
+                                        className="object-contain rounded-lg p-2"
+                                        sizes="(max-width: 768px) 250px, 250px"
                                     />
                                 </div>
                             ) : (

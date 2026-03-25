@@ -6,7 +6,7 @@ export const generateReceipt = (payment, citizen) => {
     const pageWidth = doc.internal.pageSize.getWidth();
 
     // 1. Header background
-    doc.setFillColor(0, 143, 93); // #008f5d
+    doc.setFillColor(0, 143, 93); // #065f46
     doc.rect(0, 0, pageWidth, 40, "F");
 
     // 2. Organization Name

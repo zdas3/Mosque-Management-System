@@ -106,7 +106,7 @@ export default function AdminSettings() {
             <h3 className="text-lg font-bold text-gray-900 mb-2">{title}</h3>
             <p className="text-sm text-gray-500 mb-4">{description}</p>
 
-            <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-xl hover:border-[#008f5d] transition-colors relative bg-gray-50">
+            <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-xl hover:border-[#065f46] transition-colors relative bg-gray-50">
                 <div className="space-y-1 text-center w-full max-w-sm mx-auto">
                     {(files[key] || settings[key]) ? (
                         <div className="flex flex-col items-center gap-3">
@@ -129,7 +129,7 @@ export default function AdminSettings() {
                         <div className="py-8">
                             <Upload className="mx-auto h-12 w-12 text-gray-400 mb-4" />
                             <div className="flex text-sm text-gray-600 justify-center">
-                                <label className="relative cursor-pointer rounded-md font-medium text-[#008f5d] hover:text-[#007049]">
+                                <label className="relative cursor-pointer rounded-md font-medium text-[#065f46] hover:text-[#007049]">
                                     <span>Upload a QR code</span>
                                     <input type="file" className="sr-only" accept="image/*" onChange={(e) => handleFileChange(key, e)} />
                                 </label>
@@ -155,7 +155,7 @@ export default function AdminSettings() {
                 <button
                     onClick={handleSave}
                     disabled={isSaving}
-                    className="flex items-center gap-2 bg-[#008f5d] text-white px-6 py-2.5 rounded-xl font-bold hover:bg-[#007049] transition-all disabled:opacity-50 shadow-sm"
+                    className="flex items-center gap-2 bg-[#065f46] text-white px-6 py-2.5 rounded-xl font-bold hover:bg-[#007049] transition-all disabled:opacity-50 shadow-sm"
                 >
                     <Save size={18} />
                     {isSaving ? "Saving..." : "Save Changes"}

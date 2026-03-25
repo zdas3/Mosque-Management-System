@@ -6,6 +6,7 @@ import { Save, Loader2, Camera } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
+import Image from "next/image";
 
 export default function ProfilePage() {
     const [loading, setLoading] = useState(true);
@@ -78,7 +79,7 @@ export default function ProfilePage() {
                         <div className="flex flex-col items-center gap-4 mb-8">
                             <div className="relative h-24 w-24 rounded-full bg-emerald-100 flex items-center justify-center text-emerald-700 text-3xl font-bold border-4 border-white shadow-sm">
                                 {formData.profileImage ? (
-                                    <img src={formData.profileImage} alt="Profile" className="h-full w-full rounded-full object-cover" />
+                                    <Image src={formData.profileImage} alt="Profile" fill className="rounded-full object-cover" sizes="(max-width: 768px) 96px, 96px" />
                                 ) : (
                                     formData.name?.[0]
                                 )}

@@ -1,12 +1,25 @@
 
 "use client";
-import { CitizenSidebar } from "@/components/layout/CitizenSidebar";
+
+import { useEffect, useState } from "react";
+import { CitizenTopNav } from "@/components/layout/CitizenTopNav";
 
 export default function CitizenLayout({ children }) {
+    const [user, setUser] = useState(null);
+
+    useEffect(() => {
+        fetch('/api/profile')
+            .then(res => res.json())
+            .then(data => {
+                if (data.name) setUser(data);
+            })
+            .catch(console.error);
+    }, []);
+
     return (
-        <div className="flex min-h-[calc(100vh-80px)] bg-gray-50 relative">
-            <CitizenSidebar />
-            <main className="flex-1 w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-8 pt-32 transition-all duration-300 md:pl-72">
+        <div className="flex flex-col min-h-screen bg-gray-50 relative">
+            <CitizenTopNav user={user} />
+            <main className="flex-1 w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-10 py-8 transition-all duration-300">
                 {children}
             </main>
         </div>

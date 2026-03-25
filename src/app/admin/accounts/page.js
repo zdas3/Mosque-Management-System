@@ -161,7 +161,7 @@ export default function AdminAccounts() {
                     <div className="text-2xl font-bold text-gray-900">₹{stats.totalExpense.toLocaleString()}</div>
                 </CardContent>
             </Card>
-            <Card className={cn("shadow-sm border-none text-white", stats.surplus >= 0 ? "bg-[#008f5d]" : "bg-red-600")}>
+            <Card className={cn("shadow-sm border-none text-white", stats.surplus >= 0 ? "bg-[#065f46]" : "bg-red-600")}>
                 <CardHeader className="flex flex-row items-center justify-between pb-2">
                     <CardTitle className="text-sm font-medium text-white/80">Net Balance</CardTitle>
                     <Calculator className="h-4 w-4 text-white/80" />
@@ -181,6 +181,13 @@ export default function AdminAccounts() {
                     <tr>
                         <th className="px-6 py-4">Title</th>
                         {(type === 'Income' || type === 'Expense') && <th className="px-6 py-4">Amount</th>}
+                        {type === 'Events' && (
+                            <>
+                                <th className="px-6 py-4">Total Income</th>
+                                <th className="px-6 py-4">Total Expense</th>
+                                <th className="px-6 py-4">Net Balance</th>
+                            </>
+                        )}
                         <th className="px-6 py-4">Date</th>
                         {type === 'Reports' && <th className="px-6 py-4">Type</th>}
                         {type === 'Reports' && <th className="px-6 py-4">File</th>}
@@ -188,7 +195,15 @@ export default function AdminAccounts() {
                     </tr>
                 </thead>
                 <tbody className="divide-y divide-gray-100">
-                    {items.map(item => (
+                    {items.map(item => {
+                        let evIncome = 0;
+                        let evExpense = 0;
+                        if (type === 'Events') {
+                            evIncome = income.filter(i => (i.eventId?._id || i.eventId) === item._id).reduce((acc, curr) => acc + curr.amount, 0);
+                            evExpense = expense.filter(e => (e.eventId?._id || e.eventId) === item._id).reduce((acc, curr) => acc + curr.amount, 0);
+                        }
+
+                        return (
                         <tr key={item._id} className="hover:bg-gray-50/50">
                             <td className="px-6 py-4 font-medium text-gray-900">
                                 {item.title}
@@ -203,13 +218,22 @@ export default function AdminAccounts() {
                                     ₹{item.amount}
                                 </td>
                             )}
+                            {type === 'Events' && (
+                                <>
+                                    <td className="px-6 py-4 text-emerald-600 font-medium">₹{evIncome.toLocaleString()}</td>
+                                    <td className="px-6 py-4 text-red-600 font-medium">₹{evExpense.toLocaleString()}</td>
+                                    <td className={cn("px-6 py-4 font-bold", evIncome - evExpense >= 0 ? 'text-emerald-700' : 'text-red-700')}>
+                                        ₹{(evIncome - evExpense).toLocaleString()}
+                                    </td>
+                                </>
+                            )}
                             <td className="px-6 py-4 text-gray-500">
                                 {new Date(item.date || item.createdAt).toLocaleDateString()}
                             </td>
                             {type === 'Reports' && <td className="px-6 py-4">{item.type}</td>}
                             {type === 'Reports' && (
                                 <td className="px-6 py-4">
-                                    <a href={item.fileUrl} target="_blank" className="text-[#008f5d] hover:underline flex items-center gap-1">
+                                    <a href={item.fileUrl} target="_blank" className="text-[#065f46] hover:underline flex items-center gap-1">
                                         <Download size={14} /> View
                                     </a>
                                 </td>
@@ -225,10 +249,10 @@ export default function AdminAccounts() {
                                 </button>
                             </td>
                         </tr>
-                    ))}
+                    )})}
                     {items.length === 0 && (
                         <tr>
-                            <td colSpan={6} className="px-6 py-12 text-center text-gray-500">No records found.</td>
+                            <td colSpan={7} className="px-6 py-12 text-center text-gray-500">No records found.</td>
                         </tr>
                     )}
                 </tbody>
@@ -243,20 +267,20 @@ export default function AdminAccounts() {
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                         <label className="block text-sm font-medium text-gray-700 mb-1">Title</label>
-                        <input required type="text" onChange={e => setFormData({ ...formData, title: e.target.value })} className="w-full border-gray-300 rounded-lg p-2.5 border outline-none focus:ring-2 focus:ring-[#008f5d]" placeholder="e.g. Donation, Maintenance" />
+                        <input required type="text" onChange={e => setFormData({ ...formData, title: e.target.value })} className="w-full border-gray-300 rounded-lg p-2.5 border outline-none focus:ring-2 focus:ring-[#065f46]" placeholder="e.g. Donation, Maintenance" />
                     </div>
 
                     {((!selectedEvent && (activeTab === "Income" || activeTab === "Expense")) || (selectedEvent && (eventActiveTab === "Income" || eventActiveTab === "Expense"))) && (
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Amount</label>
-                            <input required type="number" onChange={e => setFormData({ ...formData, amount: e.target.value })} className="w-full border-gray-300 rounded-lg p-2.5 border outline-none focus:ring-2 focus:ring-[#008f5d]" placeholder="0.00" />
+                            <input required type="number" onChange={e => setFormData({ ...formData, amount: e.target.value })} className="w-full border-gray-300 rounded-lg p-2.5 border outline-none focus:ring-2 focus:ring-[#065f46]" placeholder="0.00" />
                         </div>
                     )}
 
                     {((!selectedEvent && (activeTab === "Income" || activeTab === "Expense" || activeTab === "Events")) || (selectedEvent && (eventActiveTab === "Income" || eventActiveTab === "Expense"))) && (
                         <div>
                             <label className="block text-sm font-medium text-gray-700 mb-1">Date</label>
-                            <input required type="date" onChange={e => setFormData({ ...formData, date: e.target.value })} className="w-full border-gray-300 rounded-lg p-2.5 border outline-none focus:ring-2 focus:ring-[#008f5d]" />
+                            <input required type="date" onChange={e => setFormData({ ...formData, date: e.target.value })} className="w-full border-gray-300 rounded-lg p-2.5 border outline-none focus:ring-2 focus:ring-[#065f46]" />
                         </div>
                     )}
 
@@ -264,7 +288,7 @@ export default function AdminAccounts() {
                         <>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Report Type</label>
-                                <select required onChange={e => setFormData({ ...formData, type: e.target.value })} className="w-full border-gray-300 rounded-lg p-2.5 border outline-none focus:ring-2 focus:ring-[#008f5d]">
+                                <select required onChange={e => setFormData({ ...formData, type: e.target.value })} className="w-full border-gray-300 rounded-lg p-2.5 border outline-none focus:ring-2 focus:ring-[#065f46]">
                                     <option value="">Select Type</option>
                                     <option value="Income">Income</option>
                                     <option value="Expense">Expense</option>
@@ -273,7 +297,7 @@ export default function AdminAccounts() {
                             </div>
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Document (PDF/Image)</label>
-                                <input required type="file" onChange={e => setFile(e.target.files[0])} className="w-full border-gray-300 rounded-lg p-2 border outline-none focus:ring-2 focus:ring-[#008f5d]" />
+                                <input required type="file" onChange={e => setFile(e.target.files[0])} className="w-full border-gray-300 rounded-lg p-2 border outline-none focus:ring-2 focus:ring-[#065f46]" />
                             </div>
                         </>
                     )}
@@ -281,7 +305,7 @@ export default function AdminAccounts() {
 
                 <div className="flex gap-2 justify-end mt-4">
                     <button type="button" onClick={() => setShowForm(false)} className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-lg font-medium transition-colors">Cancel</button>
-                    <button disabled={isSubmitting} type="submit" className="px-6 py-2 bg-[#008f5d] text-white rounded-lg font-bold hover:bg-[#007049] transition-colors disabled:opacity-50 flex items-center gap-2">
+                    <button disabled={isSubmitting} type="submit" className="px-6 py-2 bg-[#065f46] text-white rounded-lg font-bold hover:bg-[#007049] transition-colors disabled:opacity-50 flex items-center gap-2">
                         {isSubmitting ? "Saving..." : "Save Entry"}
                     </button>
                 </div>
@@ -290,8 +314,8 @@ export default function AdminAccounts() {
     );
 
     const renderEventView = () => {
-        const eventIncome = income.filter(i => i.eventId === selectedEvent._id);
-        const eventExpense = expense.filter(e => e.eventId === selectedEvent._id);
+        const eventIncome = income.filter(i => (i.eventId?._id || i.eventId) === selectedEvent._id);
+        const eventExpense = expense.filter(e => (e.eventId?._id || e.eventId) === selectedEvent._id);
         const totalEvIncome = eventIncome.reduce((acc, curr) => acc + curr.amount, 0);
         const totalEvExpense = eventExpense.reduce((acc, curr) => acc + curr.amount, 0);
         const evSurplus = totalEvIncome - totalEvExpense;
@@ -417,13 +441,13 @@ export default function AdminAccounts() {
                     <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                         <div>
                             <h1 className="text-3xl font-bold text-gray-900 font-outfit flex items-center gap-2">
-                                <Calculator className="text-[#008f5d] h-8 w-8" />
+                                <Calculator className="text-[#065f46] h-8 w-8" />
                                 Accounts & Finance
                             </h1>
                             <p className="text-gray-500 mt-1">Manage income, expenses, events, and generate reports.</p>
                         </div>
                         {activeTab !== "Overview" && (
-                            <button onClick={handleFormOpen} className="flex items-center gap-2 bg-[#008f5d] text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-[#007049] transition-colors shadow-sm">
+                            <button onClick={handleFormOpen} className="flex items-center gap-2 bg-[#065f46] text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-[#007049] transition-colors shadow-sm">
                                 <Plus size={16} /> Add {activeTab === "Events" ? "Event" : activeTab.slice(0, -1)}
                             </button>
                         )}
@@ -437,7 +461,7 @@ export default function AdminAccounts() {
                                 onClick={() => { setActiveTab(tab); setShowForm(false); }}
                                 className={cn(
                                     "px-6 py-3 text-sm font-bold whitespace-nowrap border-b-2 transition-all duration-200",
-                                    activeTab === tab ? "border-[#008f5d] text-[#008f5d]" : "border-transparent text-gray-500 hover:text-gray-900 hover:border-gray-200 hover:bg-gray-50 rounded-t-lg"
+                                    activeTab === tab ? "border-[#065f46] text-[#065f46]" : "border-transparent text-gray-500 hover:text-gray-900 hover:border-gray-200 hover:bg-gray-50 rounded-t-lg"
                                 )}
                             >
                                 {tab}

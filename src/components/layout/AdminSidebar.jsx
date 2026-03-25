@@ -46,7 +46,7 @@ export function AdminSidebar() {
             </div>
             
             {/* Quick Stats or Info could go here to make it feel premium */}
-            <div className="absolute bottom-6 left-5 right-5 p-4 rounded-xl bg-gradient-to-br from-[#008f5d] to-[#00eb9b] text-white shadow-lg overflow-hidden">
+            <div className="absolute bottom-6 left-5 right-5 p-4 rounded-xl bg-gradient-to-br from-[#065f46] to-[#0d9488] text-white shadow-lg overflow-hidden">
                 <div className="absolute -right-6 -top-6 w-24 h-24 bg-white/20 rounded-full blur-xl pointer-events-none" />
                 <p className="text-xs font-bold tracking-wider mb-1 opacity-90">ICC Admin</p>
                 <p className="text-[10px] font-medium opacity-80 leading-relaxed">Mosque Management System</p>

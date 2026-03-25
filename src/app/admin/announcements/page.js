@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Plus, Trash2, Edit2, Megaphone, Upload, X } from "lucide-react";
+import Image from "next/image";
 
 export default function AdminAnnouncements() {
     const [announcements, setAnnouncements] = useState([]);
@@ -135,7 +136,7 @@ export default function AdminAnnouncements() {
                             setEditingId(null);
                         }
                     }}
-                    className="flex items-center gap-2 bg-[#008f5d] text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-[#007049] transition-colors"
+                    className="flex items-center gap-2 bg-[#065f46] text-white px-4 py-2 rounded-xl text-sm font-medium hover:bg-[#007049] transition-colors"
                 >
                     {showForm ? "Cancel" : <><Plus size={16} /> New Announcement</>}
                 </button>
@@ -152,7 +153,7 @@ export default function AdminAnnouncements() {
                                 type="text"
                                 value={formData.title}
                                 onChange={e => setFormData({ ...formData, title: e.target.value })}
-                                className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border outline-none focus:ring-2 focus:ring-[#008f5d]"
+                                className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border outline-none focus:ring-2 focus:ring-[#065f46]"
                                 placeholder="E.g., Special Jumu'ah Guest Speaker"
                             />
                         </div>
@@ -163,14 +164,14 @@ export default function AdminAnnouncements() {
                                 rows={4}
                                 value={formData.description}
                                 onChange={e => setFormData({ ...formData, description: e.target.value })}
-                                className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border outline-none focus:ring-2 focus:ring-[#008f5d]"
+                                className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border outline-none focus:ring-2 focus:ring-[#065f46]"
                                 placeholder="Detailed description of the announcement..."
                             />
                         </div>
                         <div className="grid grid-cols-2 gap-4">
                             <div>
                                 <label className="block text-sm font-medium text-gray-700 mb-1">Cover Image (Optional)</label>
-                                <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-[#008f5d] transition-colors relative">
+                                <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-lg hover:border-[#065f46] transition-colors relative">
                                     <div className="space-y-1 text-center">
                                         {(imageFile || formData.image) ? (
                                             <div className="flex flex-col items-center gap-2">
@@ -196,7 +197,7 @@ export default function AdminAnnouncements() {
                                             <>
                                                 <Upload className="mx-auto h-12 w-12 text-gray-400" />
                                                 <div className="flex text-sm text-gray-600 justify-center">
-                                                    <label htmlFor="file-upload" className="relative cursor-pointer bg-white rounded-md font-medium text-[#008f5d] hover:text-[#007049] focus-within:outline-none">
+                                                    <label htmlFor="file-upload" className="relative cursor-pointer bg-white rounded-md font-medium text-[#065f46] hover:text-[#007049] focus-within:outline-none">
                                                         <span>Upload a file</span>
                                                         <input id="file-upload" name="file-upload" type="file" className="sr-only" accept="image/*" onChange={handleFileChange} />
                                                     </label>
@@ -214,14 +215,14 @@ export default function AdminAnnouncements() {
                                     type="date"
                                     value={formData.expiresAt}
                                     onChange={e => setFormData({ ...formData, expiresAt: e.target.value })}
-                                    className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border outline-none focus:ring-2 focus:ring-[#008f5d]"
+                                    className="w-full border-gray-300 rounded-lg shadow-sm p-2.5 border outline-none focus:ring-2 focus:ring-[#065f46]"
                                 />
                             </div>
                         </div>
                         <button
                             type="submit"
                             disabled={isSubmitting}
-                            className="w-full bg-[#008f5d] text-white py-3 rounded-xl font-bold hover:bg-[#007049] transition-all disabled:opacity-50"
+                            className="w-full bg-[#065f46] text-white py-3 rounded-xl font-bold hover:bg-[#007049] transition-all disabled:opacity-50"
                         >
                             {isSubmitting ? "Saving..." : "Save Announcement"}
                         </button>
@@ -242,7 +243,9 @@ export default function AdminAnnouncements() {
                     {announcements.map((item) => (
                         <div key={item._id} className="bg-white rounded-2xl border border-gray-200 overflow-hidden shadow-sm hover:shadow-md transition-shadow relative group">
                             {item.image && (
-                                <img src={item.image} alt={item.title} className="w-full h-48 object-cover" />
+                                <div className="relative w-full h-48">
+                                    <Image src={item.image} alt={item.title} fill className="object-cover" sizes="(max-width: 768px) 100vw, 33vw" />
+                                </div>
                             )}
                             <div className="p-5">
                                 <h3 className="font-bold text-lg text-gray-900 mb-2 truncate">{item.title}</h3>

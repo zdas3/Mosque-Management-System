@@ -40,7 +40,7 @@ export default function GlobalHeader({ user }) {
         return () => window.removeEventListener('scroll', handleScroll);
     }, [isHome]);
 
-    if (isAdminArea) return null;
+    if (isAdminArea || isCitizenArea) return null;
 
     const handleLogout = async () => {
         await fetch('/api/auth/logout', { method: 'POST' });
@@ -60,7 +60,7 @@ export default function GlobalHeader({ user }) {
                     {/* Logo Section */}
                     <div className="flex items-center gap-3">
                         <Link href={isAdminArea ? '/admin/dashboard' : isCitizenArea ? '/citizen/dashboard' : '/'} className="flex items-center gap-3 group">
-                            <div className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-xl transition-all duration-300 bg-[#008f5d] text-white shadow-md group-hover:scale-105">
+                            <div className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-xl transition-all duration-300 bg-[#065f46] text-white shadow-md group-hover:scale-105">
                                 IC
                             </div>
                             <div className="flex flex-col">
@@ -90,7 +90,7 @@ export default function GlobalHeader({ user }) {
                                         {isActive && (
                                             <motion.div
                                                 layoutId="header-indicator"
-                                                className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#d4af37]"
+                                                className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#f59e0b]"
                                             />
                                         )}
                                     </Link>
@@ -141,7 +141,7 @@ export default function GlobalHeader({ user }) {
                                 {!(isAdminArea || isCitizenArea) && (
                                     <Link
                                         href="/#contribute"
-                                        className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium text-[#008f5d] bg-white hover:bg-gray-100 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
+                                        className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium text-[#065f46] bg-white hover:bg-gray-100 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
                                     >
                                         Contribute <ChevronRight size={16} />
                                     </Link>
@@ -177,7 +177,7 @@ export default function GlobalHeader({ user }) {
                                     key={link.name}
                                     href={link.path}
                                     onClick={() => setIsMobileMenuOpen(false)}
-                                    className="block px-4 py-3 rounded-xl text-base font-medium text-gray-300 hover:bg-white/5 hover:text-[#00eb9b] transition-colors"
+                                    className="block px-4 py-3 rounded-xl text-base font-medium text-gray-300 hover:bg-white/5 hover:text-[#0d9488] transition-colors"
                                 >
                                     {link.name}
                                 </Link>
@@ -215,7 +215,7 @@ export default function GlobalHeader({ user }) {
                                         </Link>
                                         <Link
                                             href="/#contribute"
-                                            className="w-full flex justify-center items-center gap-2 px-5 py-3 rounded-xl text-base font-medium text-black bg-[#00eb9b] hover:bg-emerald-400"
+                                            className="w-full flex justify-center items-center gap-2 px-5 py-3 rounded-xl text-base font-medium text-black bg-[#0d9488] hover:bg-emerald-400"
                                             onClick={() => setIsMobileMenuOpen(false)}
                                         >
                                             Contribute

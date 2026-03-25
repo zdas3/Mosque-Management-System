@@ -4,6 +4,7 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Wallet, CreditCard, ArrowRight, QrCode, X, Sparkles } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function ContributeSection({ contributionQr }) {
     const [showQr, setShowQr] = useState(false);
@@ -12,9 +13,9 @@ export default function ContributeSection({ contributionQr }) {
         <section id="contribute" className="py-32 bg-[#050505] relative overflow-hidden border-t border-white/5">
             {/* Mind-Blowing Background elements */}
             <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
-                <div className="absolute left-1/4 top-1/2 w-[600px] h-[600px] bg-[#008f5d]/10 blur-[150px] rounded-full -translate-y-1/2" />
-                <div className="absolute right-1/4 top-1/2 w-[500px] h-[500px] bg-[#d4af37]/5 blur-[120px] rounded-full -translate-y-1/2" />
-                <div className="absolute bottom-0 w-full h-px bg-gradient-to-r from-transparent via-[#008f5d]/20 to-transparent" />
+                <div className="absolute left-1/4 top-1/2 w-[600px] h-[600px] bg-[#065f46]/10 blur-[150px] rounded-full -translate-y-1/2" />
+                <div className="absolute right-1/4 top-1/2 w-[500px] h-[500px] bg-[#f59e0b]/5 blur-[120px] rounded-full -translate-y-1/2" />
+                <div className="absolute bottom-0 w-full h-px bg-gradient-to-r from-transparent via-[#065f46]/20 to-transparent" />
             </div>
 
             <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -24,7 +25,7 @@ export default function ContributeSection({ contributionQr }) {
                     viewport={{ once: true }}
                     className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/5 border border-white/10 backdrop-blur-md shadow-[0_0_20px_rgba(212,175,55,0.1)] mb-8"
                 >
-                    <Heart size={16} className="text-[#d4af37]" />
+                    <Heart size={16} className="text-[#f59e0b]" />
                     <span className="text-sm font-bold tracking-wide text-emerald-100 uppercase">Support the House of Allah</span>
                 </motion.div>
 
@@ -35,7 +36,7 @@ export default function ContributeSection({ contributionQr }) {
                     transition={{ delay: 0.1 }}
                     className="text-5xl md:text-7xl font-black text-white mb-8 font-outfit tracking-tighter"
                 >
-                    Sadaqah <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#d4af37] to-yellow-200">Jariyah</span>
+                    Sadaqah <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#f59e0b] to-yellow-200">Jariyah</span>
                 </motion.h2>
 
                 <motion.p
@@ -45,13 +46,13 @@ export default function ContributeSection({ contributionQr }) {
                     transition={{ delay: 0.2 }}
                     className="text-xl text-gray-400 max-w-3xl mx-auto mb-20 leading-relaxed font-light"
                 >
-                    "Those who spend their wealth in the cause of Allah, and do not follow up their gifts with reminders of their generosity or with injury, their reward is with their Lord." <br /> <span className="text-[#d4af37]/80 font-medium">(Al-Baqarah 2:262)</span>
+                    "Those who spend their wealth in the cause of Allah, and do not follow up their gifts with reminders of their generosity or with injury, their reward is with their Lord." <br /> <span className="text-[#f59e0b]/80 font-medium">(Al-Baqarah 2:262)</span>
                 </motion.p>
 
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
                     {[
-                        { title: 'General Fund', desc: 'Support the daily operations and maintenance of the mosque.', icon: Wallet, color: 'from-[#008f5d] to-[#00eb9b]', glow: 'shadow-[0_0_30px_rgba(0,143,93,0.3)]' },
-                        { title: 'Zakat Fund', desc: 'Fulfill your obligatory Zakat. 100% distributed to the needy.', icon: Heart, color: 'from-[#d4af37] to-amber-300', glow: 'shadow-[0_0_30px_rgba(212,175,55,0.3)]' },
+                        { title: 'General Fund', desc: 'Support the daily operations and maintenance of the mosque.', icon: Wallet, color: 'from-[#065f46] to-[#0d9488]', glow: 'shadow-[0_0_30px_rgba(0,143,93,0.3)]' },
+                        { title: 'Zakat Fund', desc: 'Fulfill your obligatory Zakat. 100% distributed to the needy.', icon: Heart, color: 'from-[#f59e0b] to-amber-300', glow: 'shadow-[0_0_30px_rgba(212,175,55,0.3)]' },
                         { title: 'Expansion Project', desc: 'Help us build a better future for the growing community.', icon: CreditCard, color: 'from-blue-500 to-cyan-400', glow: 'shadow-[0_0_30px_rgba(59,130,246,0.3)]' }
                     ].map((fund, index) => {
                         const Icon = fund.icon;
@@ -79,9 +80,9 @@ export default function ContributeSection({ contributionQr }) {
                                         className="inline-flex w-full items-center justify-between px-6 py-4 rounded-xl bg-white/5 hover:bg-white/10 text-white font-bold transition-all border border-white/5 group/btn"
                                     >
                                         <span className="flex items-center gap-2">
-                                            Donate Now <Sparkles size={16} className="text-[#d4af37] opacity-0 group-hover/btn:opacity-100 transition-opacity" />
+                                            Donate Now <Sparkles size={16} className="text-[#f59e0b] opacity-0 group-hover/btn:opacity-100 transition-opacity" />
                                         </span>
-                                        <ArrowRight size={20} className="text-[#008f5d] group-hover/btn:translate-x-1 group-hover/btn:text-[#00eb9b] transition-all" />
+                                        <ArrowRight size={20} className="text-[#065f46] group-hover/btn:translate-x-1 group-hover/btn:text-[#0d9488] transition-all" />
                                     </button>
                                 </div>
                             </motion.div>
@@ -96,10 +97,10 @@ export default function ContributeSection({ contributionQr }) {
                     transition={{ delay: 0.8 }}
                     className="relative inline-block"
                 >
-                    <div className="absolute -inset-1 bg-gradient-to-r from-[#008f5d] to-[#d4af37] rounded-full blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
+                    <div className="absolute -inset-1 bg-gradient-to-r from-[#065f46] to-[#f59e0b] rounded-full blur opacity-30 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
                     <Link href="/login" className="relative inline-flex items-center gap-3 px-10 py-5 bg-white text-gray-950 rounded-full font-black text-lg hover:bg-gray-100 transition-all shadow-2xl hover:scale-105 transform">
                         Become a Member
-                        <ArrowRight size={22} className="text-[#008f5d]" />
+                        <ArrowRight size={22} className="text-[#065f46]" />
                     </Link>
                 </motion.div>
             </div>
@@ -128,7 +129,7 @@ export default function ContributeSection({ contributionQr }) {
                                 <X size={20} />
                             </button>
 
-                            <div className="w-20 h-20 bg-gradient-to-br from-[#008f5d] to-[#00eb9b] text-[#050505] rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-[0_0_30px_rgba(0,143,93,0.3)]">
+                            <div className="w-20 h-20 bg-gradient-to-br from-[#065f46] to-[#0d9488] text-[#050505] rounded-3xl flex items-center justify-center mx-auto mb-8 shadow-[0_0_30px_rgba(0,143,93,0.3)]">
                                 <QrCode size={36} strokeWidth={2} />
                             </div>
 
@@ -136,13 +137,15 @@ export default function ContributeSection({ contributionQr }) {
                             <p className="text-gray-400 mb-8 font-light leading-relaxed text-sm">Scan this secure QR code with any supported payment app to make your contribution.</p>
 
                             <div className="relative group mx-auto w-full max-w-[280px]">
-                                <div className="absolute -inset-1 bg-gradient-to-r from-[#008f5d] via-[#d4af37] to-[#00eb9b] rounded-[2.5rem] blur opacity-70 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
-                                <div className="relative bg-white p-6 rounded-[2rem] shadow-2xl overflow-hidden shadow-[0_0_40px_rgba(0,143,93,0.4)]">
+                                <div className="absolute -inset-1 bg-gradient-to-r from-[#065f46] via-[#f59e0b] to-[#0d9488] rounded-[2.5rem] blur opacity-70 group-hover:opacity-100 transition duration-1000 group-hover:duration-200 animate-pulse"></div>
+                                <div className="relative bg-white p-6 rounded-[2rem] shadow-2xl overflow-hidden shadow-[0_0_40px_rgba(0,143,93,0.4)] aspect-square w-full">
                                     <div className="absolute inset-0 bg-gradient-to-tr from-transparent to-white/50 pointer-events-none rounded-[2rem]"></div>
-                                    <img
+                                    <Image
                                         src={contributionQr}
                                         alt="Contribution QR Code"
-                                        className="w-full aspect-square object-contain relative z-10 drop-shadow-md"
+                                        fill
+                                        className="object-contain p-2 relative z-10 drop-shadow-md"
+                                        sizes="(max-width: 768px) 250px, 250px"
                                     />
                                     <div className="absolute bottom-4 left-0 right-0 text-center z-10 opacity-50 flex justify-center">
                                         <QrCode size={20} className="text-gray-300" />

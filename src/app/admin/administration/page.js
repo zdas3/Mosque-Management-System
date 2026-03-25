@@ -5,6 +5,7 @@ import { PlusCircle, Loader2, Edit2, Trash2, Shield, Upload, X } from "lucide-re
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Image from "next/image";
 
 export default function AdministrationPage() {
     const [leaders, setLeaders] = useState([]);
@@ -125,20 +126,20 @@ export default function AdministrationPage() {
             <div className="flex justify-between items-center">
                 <div>
                     <h1 className="text-3xl font-bold tracking-tight text-gray-900 font-outfit flex items-center gap-2">
-                        <Shield className="text-[#008f5d] h-8 w-8" />
+                        <Shield className="text-[#065f46] h-8 w-8" />
                         Administration Details
                     </h1>
                     <p className="text-muted-foreground mt-1">Manage mosque leadership and committee members</p>
                 </div>
                 {!showForm && (
-                    <Button onClick={() => setShowForm(true)} className="bg-[#008f5d] hover:bg-[#007049] gap-2">
+                    <Button onClick={() => setShowForm(true)} className="bg-[#065f46] hover:bg-[#007049] gap-2">
                         <PlusCircle size={16} /> Add Member
                     </Button>
                 )}
             </div>
 
             {showForm && (
-                <Card className="glass-card shadow-sm border border-[#008f5d]/20">
+                <Card className="glass-card shadow-sm border border-[#065f46]/20">
                     <CardHeader>
                         <CardTitle>{editingId ? "Edit Member" : "Add New Member"}</CardTitle>
                     </CardHeader>
@@ -179,7 +180,7 @@ export default function AdministrationPage() {
 
                                 <div className="space-y-4">
                                     <label className="text-sm font-medium mb-1 block">Photo (Optional)</label>
-                                    <div className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-[#008f5d] transition-colors relative bg-gray-50/50">
+                                    <div className="border-2 border-dashed border-gray-300 rounded-xl p-6 text-center hover:border-[#065f46] transition-colors relative bg-gray-50/50">
                                         {(imageFile || formData.image) ? (
                                             <div className="relative inline-block">
                                                 <img
@@ -198,7 +199,7 @@ export default function AdministrationPage() {
                                         ) : (
                                             <div className="py-4">
                                                 <Upload className="mx-auto h-10 w-10 text-gray-400 mb-3" />
-                                                <label className="cursor-pointer text-sm font-medium text-[#008f5d] hover:text-[#007049]">
+                                                <label className="cursor-pointer text-sm font-medium text-[#065f46] hover:text-[#007049]">
                                                     <span>Upload a photo</span>
                                                     <input type="file" className="sr-only" accept="image/*" onChange={(e) => {
                                                         if (e.target.files && e.target.files[0]) {
@@ -215,7 +216,7 @@ export default function AdministrationPage() {
 
                             <div className="flex gap-3 justify-end pt-4 border-t">
                                 <Button type="button" variant="outline" onClick={resetForm}>Cancel</Button>
-                                <Button type="submit" disabled={submitting} className="bg-[#008f5d] hover:bg-[#007049]">
+                                <Button type="submit" disabled={submitting} className="bg-[#065f46] hover:bg-[#007049]">
                                     {submitting ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : "Save Member"}
                                 </Button>
                             </div>
@@ -226,7 +227,7 @@ export default function AdministrationPage() {
 
             {loading ? (
                 <div className="py-12 text-center text-gray-500 flex flex-col items-center">
-                    <Loader2 className="h-8 w-8 animate-spin text-[#008f5d] mb-4" />
+                    <Loader2 className="h-8 w-8 animate-spin text-[#065f46] mb-4" />
                     Loading administration...
                 </div>
             ) : (
@@ -245,7 +246,9 @@ export default function AdministrationPage() {
                             <CardContent className="p-6 text-center">
                                 <div className="w-24 h-24 mx-auto mb-4 rounded-full overflow-hidden bg-gray-100 border-4 border-white shadow-sm flex items-center justify-center">
                                     {leader.image ? (
-                                        <img src={leader.image} alt={leader.name} className="w-full h-full object-cover" />
+                                        <div className="relative w-full h-full">
+                                            <Image src={leader.image} alt={leader.name} fill className="object-cover" sizes="(max-width: 768px) 96px, 96px" />
+                                        </div>
                                     ) : (
                                         <Shield className="h-10 w-10 text-gray-300" />
                                     )}

@@ -40,7 +40,7 @@ export default function PublicNavbar() {
                     {/* Logo Section */}
                     <div className="flex items-center gap-3">
                         <Link href="/" className="flex items-center gap-3 group">
-                            <div className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-xl transition-all duration-300 bg-[#008f5d] text-white shadow-md group-hover:scale-105">
+                            <div className="w-10 h-10 rounded-xl flex items-center justify-center font-bold text-xl transition-all duration-300 bg-[#065f46] text-white shadow-md group-hover:scale-105">
                                 IC
                             </div>
                             <div className="flex flex-col">
@@ -69,7 +69,7 @@ export default function PublicNavbar() {
                                     {isActive && (
                                         <motion.div
                                             layoutId="navbar-indicator"
-                                            className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#d4af37]"
+                                            className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#f59e0b]"
                                         />
                                     )}
                                 </Link>
@@ -88,7 +88,7 @@ export default function PublicNavbar() {
                         </Link>
                         <Link
                             href="/#contribute"
-                            className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium text-[#008f5d] bg-white hover:bg-gray-100 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
+                            className="flex items-center gap-2 px-5 py-2.5 rounded-full text-sm font-medium text-[#065f46] bg-white hover:bg-gray-100 hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5"
                         >
                             Contribute <ChevronRight size={16} />
                         </Link>
@@ -121,7 +121,7 @@ export default function PublicNavbar() {
                                     key={link.name}
                                     href={link.path}
                                     onClick={() => setIsMobileMenuOpen(false)}
-                                    className="block px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:bg-emerald-50 hover:text-[#008f5d] transition-colors"
+                                    className="block px-4 py-3 rounded-xl text-base font-medium text-gray-700 hover:bg-emerald-50 hover:text-[#065f46] transition-colors"
                                 >
                                     {link.name}
                                 </Link>
@@ -136,7 +136,7 @@ export default function PublicNavbar() {
                                 </Link>
                                 <Link
                                     href="/#contribute"
-                                    className="w-full flex justify-center items-center gap-2 px-5 py-3 rounded-xl text-base font-medium text-white bg-[#008f5d] hover:bg-[#007049]"
+                                    className="w-full flex justify-center items-center gap-2 px-5 py-3 rounded-xl text-base font-medium text-white bg-[#065f46] hover:bg-[#007049]"
                                 >
                                     Contribute
                                 </Link>

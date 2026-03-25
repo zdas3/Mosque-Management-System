@@ -1,6 +1,7 @@
 import dbConnect from '@/lib/db';
 import Leadership from '@/models/Leadership';
 import { Phone } from 'lucide-react';
+import Image from 'next/image';
 
 export default async function LeadershipSection() {
     await dbConnect();
@@ -26,7 +27,7 @@ export default async function LeadershipSection() {
                         <div key={person._id.toString()} className="group bg-white rounded-3xl shadow-sm border border-gray-100 p-8 flex flex-col items-center text-center transition-all duration-300 hover:shadow-xl hover:border-emerald-100 hover:-translate-y-2">
                             <div className="w-40 h-40 rounded-full overflow-hidden mb-6 border-4 border-emerald-50 relative bg-gray-50 flex items-center justify-center group-hover:border-emerald-100 transition-colors">
                                 {person.image ? (
-                                    <img src={person.image} alt={person.name} className="w-full h-full object-cover" />
+                                    <Image src={person.image} alt={person.name} fill className="object-cover" sizes="(max-width: 768px) 160px, 160px" />
                                 ) : (
                                     <span className="text-5xl text-gray-300 font-outfit uppercase font-light">{person.name[0]}</span>
                                 )}

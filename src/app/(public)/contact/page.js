@@ -1,6 +1,7 @@
 import dbConnect from '@/lib/db';
 import Leadership from '@/models/Leadership';
 import { MapPin, Phone, Mail, Clock } from 'lucide-react';
+import Image from 'next/image';
 
 export const revalidate = 60;
 
@@ -21,7 +22,7 @@ export default async function ContactPage() {
         <div key={person._id.toString()} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col items-center text-center transition-transform hover:-translate-y-1 hover:shadow-lg">
             <div className="w-24 h-24 rounded-full overflow-hidden mb-4 border-4 border-emerald-50 relative bg-gray-100 flex items-center justify-center">
                 {person.image ? (
-                    <img src={person.image} alt={person.name} className="w-full h-full object-cover" />
+                    <Image src={person.image} alt={person.name} fill className="object-cover" sizes="(max-width: 768px) 96px, 96px" />
                 ) : (
                     <span className="text-3xl text-gray-400 font-outfit uppercase">{person.name[0]}</span>
                 )}
@@ -58,7 +59,7 @@ export default async function ContactPage() {
                             <ul className="space-y-8">
                                 <li className="flex items-start gap-4">
                                     <div className="w-14 h-14 rounded-full bg-emerald-50 flex items-center justify-center flex-shrink-0 border border-emerald-100">
-                                        <MapPin className="text-[#008f5d]" size={24} />
+                                        <MapPin className="text-[#065f46]" size={24} />
                                     </div>
                                     <div>
                                         <h4 className="text-lg font-bold text-gray-900 mb-1">Visit Us</h4>
@@ -67,7 +68,7 @@ export default async function ContactPage() {
                                 </li>
                                 <li className="flex items-start gap-4">
                                     <div className="w-14 h-14 rounded-full bg-emerald-50 flex items-center justify-center flex-shrink-0 border border-emerald-100">
-                                        <Phone className="text-[#008f5d]" size={24} />
+                                        <Phone className="text-[#065f46]" size={24} />
                                     </div>
                                     <div>
                                         <h4 className="text-lg font-bold text-gray-900 mb-1">Call Us</h4>
@@ -76,7 +77,7 @@ export default async function ContactPage() {
                                 </li>
                                 <li className="flex items-start gap-4">
                                     <div className="w-14 h-14 rounded-full bg-emerald-50 flex items-center justify-center flex-shrink-0 border border-emerald-100">
-                                        <Mail className="text-[#008f5d]" size={24} />
+                                        <Mail className="text-[#065f46]" size={24} />
                                     </div>
                                     <div>
                                         <h4 className="text-lg font-bold text-gray-900 mb-1">Email Us</h4>
@@ -85,7 +86,7 @@ export default async function ContactPage() {
                                 </li>
                                 <li className="flex items-start gap-4">
                                     <div className="w-14 h-14 rounded-full bg-emerald-50 flex items-center justify-center flex-shrink-0 border border-emerald-100">
-                                        <Clock className="text-[#008f5d]" size={24} />
+                                        <Clock className="text-[#065f46]" size={24} />
                                     </div>
                                     <div>
                                         <h4 className="text-lg font-bold text-gray-900 mb-1">Office Hours</h4>

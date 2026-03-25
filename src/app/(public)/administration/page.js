@@ -23,7 +23,7 @@ export default async function AdministrationPage() {
         <div key={person._id.toString()} className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col items-center text-center transition-transform hover:-translate-y-1 hover:shadow-lg">
             <div className="w-32 h-32 rounded-full overflow-hidden mb-4 border-4 border-emerald-50 relative bg-gray-100 flex items-center justify-center">
                 {person.image ? (
-                    <img src={person.image} alt={person.name} className="w-full h-full object-cover" />
+                    <Image src={person.image} alt={person.name} fill className="object-cover" sizes="(max-width: 768px) 128px, 128px" />
                 ) : (
                     <span className="text-4xl text-gray-400 font-outfit uppercase">{person.name[0]}</span>
                 )}
